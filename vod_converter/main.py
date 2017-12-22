@@ -39,9 +39,9 @@ def main(*, from_path, from_key, to_path, to_key, select_only_known_labels, filt
                                      select_only_known_labels=select_only_known_labels,
                                      filter_images_without_labels=filter_images_without_labels)
     if success:
-        print(f"Successfully converted from {from_key} to {to_key}.")
+        print("Successfully converted from {} to {}.".format(from_key, to_key))
     else:
-        print(f"Failed to convert from {from_key} to {to_key}: {msg}")
+        print("Failed to convert from {} to {}: {}".format(from_key, to_key, msg))
         return 1
 
 
@@ -53,12 +53,12 @@ def parse_args():
     required.add_argument('--from',
                           dest='from_key',
                           required=True,
-                          help=f'Format to convert from: one of {", ".join(INGESTORS.keys())}', type=str)
+                          help='Format to convert from: one of {}'.format(", ".join(INGESTORS.keys())), type=str)
     required.add_argument('--from-path', dest='from_path',
                           required=True,
-                          help=f'Path to dataset you wish to convert.', type=str)
+                          help='Path to dataset you wish to convert.', type=str)
     required.add_argument('--to', dest='to_key', required=True,
-                          help=f'Format to convert to: one of {", ".join(EGESTORS.keys())}',
+                          help='Format to convert to: one of {}'.format(", ".join(EGESTORS.keys())),
                           type=str)
     required.add_argument(
         '--to-path',

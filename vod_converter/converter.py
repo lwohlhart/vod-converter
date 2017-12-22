@@ -28,7 +28,7 @@ IMAGE_SCHEMA = {
         'id': {'type': 'string'},
         'path': {'type': 'string'},
         'segmented_path': {
-            'anyOf': [
+            'anyO': [
                 {'type': 'null'},
                 {'type': 'string'}
             ]
@@ -146,13 +146,13 @@ def validate_image_detections(image_detections):
         try:
             validate_schema(image_detection, IMAGE_DETECTION_SCHEMA)
         except SchemaError as se:
-            raise Exception(f"at index {i}") from se
+            raise Exception("at index {}".format(i)) from se
         image = image_detection['image']
         for detection in image_detection['detections']:
             if detection['right'] >= image['width'] or detection['bottom'] >= image['height']:
-                raise ValueError(f"Image {image} has out of bounds bounding box {detection}")
+                raise ValueError("Image {} has out of bounds bounding box {}".format(image, detection))
             if detection['right'] <= detection['left'] or detection['bottom'] <= detection['top']:
-                raise ValueError(f"Image {image} has zero dimension bbox {detection}")
+                raise ValueError("Image {} has zero dimension bbox {}".format(image, detection))
 
 
 def convert_labels(*, image_detections, expected_labels,

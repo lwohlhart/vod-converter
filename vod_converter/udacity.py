@@ -18,13 +18,13 @@ from converter import Ingestor
 class UdacityCrowdAIIngestor(Ingestor):
 
     def validate(self, root):
-        labels_path = f"{root}/labels.csv"
+        labels_path = "{}/labels.csv".format(root)
         if not os.path.isfile(labels_path):
-            return False, f"Expected to find {labels_path}"
+            return False, "Expected to find {}".format(labels_path)
         return True, None
 
     def ingest(self, root):
-        labels_path = f"{root}/labels.csv"
+        labels_path = "{}/labels.csv".format(root)
         image_labels = defaultdict(list)
 
         with open(labels_path) as labels_file:
@@ -34,7 +34,7 @@ class UdacityCrowdAIIngestor(Ingestor):
                 image_labels[row[4]].append(row)
 
         image_detections = []
-        for idx, image_path in enumerate(glob.glob(f"{root}/*.jpg")):
+        for idx, image_path in enumerate(glob.glob("{}/*.jpg".format(root))):
             f_name = image_path.split("/")[-1]
             f_image_labels = image_labels[f_name]
             fname_id = f_name.split('.')[0]
@@ -81,13 +81,13 @@ class UdacityCrowdAIIngestor(Ingestor):
 
 class UdacityAuttiIngestor(Ingestor):
     def validate(self, root):
-        labels_path = f"{root}/labels.csv"
+        labels_path = "{}/labels.csv".format(root)
         if not os.path.isfile(labels_path):
-            return False, f"Expected to find {labels_path}"
+            return False, "Expected to find {}".format(labels_path)
         return True, None
 
     def ingest(self, root):
-        labels_path = f"{root}/labels.csv"
+        labels_path = "{}/labels.csv".format(root)
         image_labels = defaultdict(list)
 
         with open(labels_path) as labels_file:
@@ -97,7 +97,7 @@ class UdacityAuttiIngestor(Ingestor):
                 image_labels[row[0]].append(row)
 
         image_detections = []
-        for idx, image_path in enumerate(glob.glob(f"{root}/*.jpg")):
+        for idx, image_path in enumerate(glob.glob("{}/*.jpg".format(root))):
             f_name = image_path.split("/")[-1]
             f_image_labels = image_labels[f_name]
             fname_id = f_name.split('.')[0]
